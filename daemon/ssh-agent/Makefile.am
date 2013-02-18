@@ -5,7 +5,8 @@ INCLUDES = \
 	-I$(top_srcdir)/pkcs11 \
 	$(GOBJECT_CFLAGS) \
 	$(GLIB_CFLAGS) \
-	-DGCK_API_SUBJECT_TO_CHANGE
+	-DGCK_API_SUBJECT_TO_CHANGE \
+	`pkg-config --cflags --libs libnotify`
 
 # ------------------------------------------------------------------------------
 # The ssh-agent component code
@@ -36,4 +37,5 @@ gkd_ssh_agent_standalone_LDADD = \
 	$(GOBJECT_LIBS) \
 	$(GTHREAD_LIBS) \
 	$(LIBGCRYPT_LIBS) \
+	$(DAEMON_LIBS) \
 	$(GLIB_LIBS)

@@ -421,6 +421,11 @@ DAEMON_LIBS="$DAEMON_LIBS $LIBGCRYPT_LIBS"
 AC_SUBST([LIBGCRYPT_CFLAGS])
 AC_SUBST([LIBGCRYPT_LIBS])
 
+# notify
+# yeah, no flag, no NOTIFY_LIBS,mix of C and LD. Because, I hate you, autotools.
+# - The deceptitools.
+DAEMON_LIBS="$DAEMON_LIBS `pkg-config --cflags --libs libnotify`"
+
 # -------------------------------------------------------------------
 # libtasn1
 #

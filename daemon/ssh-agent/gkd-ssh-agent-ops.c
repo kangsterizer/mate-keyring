@@ -38,7 +38,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
-
+#include <libnotify/notify.h>
 
 #define V1_LABEL "SSH1 RSA Key"
 
@@ -1079,6 +1079,14 @@ op_sign_request (GkdSshAgentCall *call)
 
 	g_free (result);
 	g_return_val_if_fail (ret, FALSE);
+
+
+	/* Notify user */
+	notify_init("mate-keyring-ssh");
+	NotifyNotification *Agent = notify_notification_new ("ssh-agent signed challenge",  "SSH-challenge signed", "emblem-unlocked");
+	notify_notification_set_category (Agent, "ssh-agent");
+	notify_notification_set_timeout (Agent, 300);
+	notify_notification_show (Agent, NULL);
 
 	/* Write back the blob length */
 	egg_buffer_set_uint32 (call->resp, blobpos, (call->resp->len - blobpos) - 4);
